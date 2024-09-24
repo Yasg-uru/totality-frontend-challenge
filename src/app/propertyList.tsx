@@ -1,55 +1,63 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import PropertyCard from './PropertyCard'
-import { Property } from '@/types'
+import { useState, useEffect } from "react";
+import PropertyCard from "./propertycard";
+import { Property } from "@/types/types";
 
 export default function PropertyList() {
-  const [properties, setProperties] = useState<Property[]>([])
+  const [properties, setProperties] = useState<Property[]>([]);
   const [filters, setFilters] = useState({
-    location: '',
-    minPrice: '',
-    maxPrice: '',
-    bedrooms: '',
-  })
+    location: "",
+    minPrice: "",
+    maxPrice: "",
+    bedrooms: "",
+  });
 
   useEffect(() => {
     // In a real application, this would be an API call
     setProperties([
       {
-        id: '1',
-        title: 'Cozy Apartment',
-        description: 'A beautiful apartment in the heart of the city',
+        id: "1",
+        title: "Cozy Apartment",
+        description: "A beautiful apartment in the heart of the city",
         price: 100,
-        image: '/placeholder.svg?height=200&width=300',
-        location: 'New York',
+        image: "/placeholder.svg?height=200&width=300",
+        location: "New York",
         bedrooms: 2,
       },
       {
-        id: '2',
-        title: 'Luxury Villa',
-        description: 'Spacious villa with a private pool',
+        id: "2",
+        title: "Luxury Villa",
+        description: "Spacious villa with a private pool",
         price: 300,
-        image: '/placeholder.svg?height=200&width=300',
-        location: 'Los Angeles',
+        image: "/placeholder.svg?height=200&width=300",
+        location: "Los Angeles",
         bedrooms: 4,
       },
       // Add more properties here
-    ])
-  }, [])
+    ]);
+  }, []);
 
-  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFilters({ ...filters, [e.target.name]: e.target.value })
-  }
+  const handleFilterChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setFilters({ ...filters, [e.target.name]: e.target.value });
+  };
 
   const filteredProperties = properties.filter((property) => {
     return (
-      (filters.location === '' || property.location.toLowerCase().includes(filters.location.toLowerCase())) &&
-      (filters.minPrice === '' || property.price >= parseInt(filters.minPrice)) &&
-      (filters.maxPrice === '' || property.price <= parseInt(filters.maxPrice)) &&
-      (filters.bedrooms === '' || property.bedrooms === parseInt(filters.bedrooms))
-    )
-  })
+      (filters.location === "" ||
+        property.location
+          .toLowerCase()
+          .includes(filters.location.toLowerCase())) &&
+      (filters.minPrice === "" ||
+        property.price >= parseInt(filters.minPrice)) &&
+      (filters.maxPrice === "" ||
+        property.price <= parseInt(filters.maxPrice)) &&
+      (filters.bedrooms === "" ||
+        property.bedrooms === parseInt(filters.bedrooms))
+    );
+  });
 
   return (
     <div>
@@ -97,5 +105,5 @@ export default function PropertyList() {
         ))}
       </div>
     </div>
-  )
+  );
 }
